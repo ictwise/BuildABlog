@@ -29,3 +29,15 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+
+class Recipe(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    recipe_title = db.Column(db.String(100), nullable=False)
+    recipe_img = db.Column(db.String(20), nullable=False, default='rdefault.jpg')
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    ingredients = db.Column(db.Text, nullable=False)
+    method = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Recipe('{self.recipe_title}', '{self.date_posted}')"
